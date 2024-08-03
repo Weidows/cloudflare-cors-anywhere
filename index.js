@@ -38,7 +38,7 @@ function isListedInWhitelist(uri, listing) {
 addEventListener("fetch", async event => {
     event.respondWith((async function() {
         const isPreflightRequest = (event.request.method === "OPTIONS");
-        
+
         const originUrl = new URL(event.request.url);
 
         // Function to modify headers to enable CORS
@@ -95,7 +95,7 @@ addEventListener("fetch", async event => {
                 });
 
                 const response = await fetch(targetUrl, newRequest);
-                const responseHeaders = new Headers(response.headers);
+                let responseHeaders = new Headers(response.headers);
                 const exposedHeaders = [];
                 const allResponseHeaders = {};
                 for (const [key, value] of response.headers.entries()) {
@@ -118,7 +118,7 @@ addEventListener("fetch", async event => {
                 return new Response(responseBody, responseInit);
 
             } else {
-                const responseHeaders = new Headers();
+                let responseHeaders = new Headers();
                 responseHeaders = setupCORSHeaders(responseHeaders);
 
                 let country = false;

@@ -1,3 +1,16 @@
-name = "cloudflare-cors-anywhere"
 main = "index.js"
 compatibility_date = "2023-04-17"
+
+[env.production]
+name = "cloudflare-cors-anywhere"
+
+[env.production.vars]
+MODE = "production"
+TARGET_UPSTREAM = ""
+
+[env.staging]
+name = "cloudflare-docker-proxy-staging"
+
+[env.staging.vars]
+MODE = "staging"
+TARGET_UPSTREAM = ""
